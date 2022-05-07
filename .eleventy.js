@@ -69,21 +69,22 @@ async function imageShortcode(src, alt, caption, sizes) {
 // module exports
 module.exports = function (eleventyConfig) {
   // Set directories to pass through to the _site folder
-  eleventyConfig.addPassthroughCopy("_src/assets/");
+  eleventyConfig.addPassthroughCopy("src/assets/");
   eleventyConfig.addPassthroughCopy("img/");
-  eleventyConfig.addPassthroughCopy("**/*.jpg");
-  eleventyConfig.addPassthroughCopy("**/*.png");
-  eleventyConfig.addPassthroughCopy("**/*.gif");
-  eleventyConfig.addPassthroughCopy("**/*.webp");
-  eleventyConfig.addPassthroughCopy("**/*.mp4");
+  eleventyConfig.addPassthroughCopy("src/**/*.jpg");
+  eleventyConfig.addPassthroughCopy("src/**/*.png");
+  eleventyConfig.addPassthroughCopy("src/**/*.gif");
+  eleventyConfig.addPassthroughCopy("src/**/*.webp");
+  eleventyConfig.addPassthroughCopy("src/**/*.mp4");
+  eleventyConfig.addPassthroughCopy("src/**/*.txt");
 
   // set markdown engine
   eleventyConfig.setLibrary("md", markdown);
 
   // Watch scss folder for changes
   // not necessary in this setup
-  eleventyConfig.addWatchTarget("./_src/assets/");
-  eleventyConfig.addWatchTarget("./_src/sass");
+  eleventyConfig.addWatchTarget("./src/assets/");
+  eleventyConfig.addWatchTarget("./src/_scss");
   eleventyConfig.addWatchTarget("./img/");
 
   // RSS Feeds
@@ -141,11 +142,10 @@ module.exports = function (eleventyConfig) {
   return {
     // set the input and output directories
     dir: {
-      input: "_src",
+      input: "src",
       output: "_site",
-      // includes folder -- not default
+      data: "_data",
       includes: "_includes",
-      // layouts folder -- not default
       layouts: "_layouts",
     },
     templateFormats: ["njk", "md", "11ty.js"],
